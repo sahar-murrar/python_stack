@@ -1,0 +1,66 @@
+**to create an enviroment in python go to the folder path and type cmd and then type:
+python -m venv ph3Env, where py3Env is the name of the enviroment.
+**to activate the enviroment type:
+call py3Env\Scripts\activate
+this command will make me work on this enviroment no on the normal enviroment of my pc.
+1. pip list 
+"This is one of the most important command that every Python developer must know. The pip list command returns the list of packages in the current environment. It also returns the installed version for each package. Packages are listed in a case-insensitive sorted order."
+
+or it shows the fameworks that installed on the virtual enviroment.
+2. deactivate
+"This will deactivate your virtual environment"
+3. pip3 list
+i got a difference since when the enviorment is activated and run "pip list" i got:
+Package    Version
+---------- -------
+pip        21.1.1
+setuptools 56.0.0
+
+but after deactivating the enviroment and run "pip3 list" i got:
+Package    Version
+---------- -------
+Django     2.2.4
+pip        21.1.1
+pytz       2021.1
+setuptools 56.0.0
+sqlparse   0.4.1
+
+the difference is just a new packafes that i have installed after applying this command:
+"pip install Django==2.2.4" the ===2.2.4 is the version of django we want to install and if we didn't specify it, it will install the latest version.
+4. pip install Django==2.2.4 and i got this output in the cmd:
+Collecting Django==2.2.4
+  Downloading Django-2.2.4-py3-none-any.whl (7.5 MB)
+     |████████████████████████████████| 7.5 MB 132 kB/s
+Collecting pytz
+  Downloading pytz-2021.1-py2.py3-none-any.whl (510 kB)
+     |████████████████████████████████| 510 kB 182 kB/s
+Collecting sqlparse
+  Downloading sqlparse-0.4.1-py3-none-any.whl (42 kB)
+     |████████████████████████████████| 42 kB 66 kB/s
+Installing collected packages: sqlparse, pytz, Django
+Successfully installed Django-2.2.4 pytz-2021.1 sqlparse-0.4.1
+5. pip freeze, and i got this output:
+Django==2.2.4
+pytz==2021.1
+sqlparse==0.4.1
+
+6. cd ~/Desktop , to go to the desktop we have to use cd .. until we reach Desktop
+7. pip freeze > requirements.txt
+this will create a file called requirements.txt and put in it the output of pip freeze which is:
+Django==2.2.4
+pytz==2021.1
+sqlparse==0.4.1
+8. when we type dir it will show us that we have a new file called requirements.txt created on the desktop.
+9. pip uninstall Django, and i got this output:
+Found existing installation: Django 2.2.4
+Uninstalling Django-2.2.4:
+  Would remove:
+    c:\users\ahmad\appdata\local\programs\python\python39\lib\site-packages\django-2.2.4.dist-info\*
+    c:\users\ahmad\appdata\local\programs\python\python39\lib\site-packages\django\*
+    c:\users\ahmad\appdata\local\programs\python\python39\scripts\django-admin.exe
+    c:\users\ahmad\appdata\local\programs\python\python39\scripts\django-admin.py
+Proceed (y/n)? y
+  Successfully uninstalled Django-2.2.4
+10. pip show Django, and i got this output:
+WARNING: Package(s) not found: Django
+
