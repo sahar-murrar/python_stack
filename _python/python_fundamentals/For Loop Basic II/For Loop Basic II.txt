@@ -1,0 +1,167 @@
+1. Biggie Size - Given a list, write a function that changes all positive numbers in the list to "big".
+
+**solution:
+def Biggingsize(arr):
+    for i in range(0, len(arr), 1):
+        if arr[i] > 0:
+            arr[i] = "big"
+    return arr
+
+
+
+arr=[-1, -3, 5, 7, 3, -55]
+y=Biggingsize(arr)
+print(y)
+
+2.Count Positives - Given a list of numbers, create a function to replace the last value with the number of positive values. (Note that zero is not considered to be a positive number).
+
+**solution:
+def Countpositives(arr):
+    count =0
+    for i in range(0, len(arr), 1): ## or for i in arr: and if i>0 >>> will give us the same result.
+        if arr[i] > 0:
+            count+=1
+    arr[-1]=count
+    return arr
+
+
+
+arr=[1, -3, 5, 7, 3, -55]
+y=Countpositives(arr)
+print(y)
+
+3. Sum Total - Create a function that takes a list and returns the sum of all the values in the list.
+
+**solution:
+def Sumtotal(arr):
+    sum =0
+    for i in range(0, len(arr), 1):
+            sum+=arr[i]
+    return sum
+
+
+
+arr=[1, -3, 5, 7, 3, -55]
+y=Sumtotal(arr)
+print(y)
+
+4. Average - Create a function that takes a list and returns the average of all the values.x
+
+**solution:
+def Average(arr):
+    sum =0
+    avg=0
+    for i in range(0, len(arr), 1):
+            sum+=arr[i]
+    avg=sum/len(arr)
+    return avg
+
+
+
+arr=[1, -3, 5, 7, 3, -55]
+y=Average(arr)
+print(y)
+
+
+5. Length - Create a function that takes a list and returns the length of the list.
+
+**solution:
+def Length(arr):
+    return len(arr)
+
+
+
+arr=[1, -3, 5, 7, 3, -55]
+y=Length(arr)
+print(y)
+
+6. Minimum - Create a function that takes a list of numbers and returns the minimum value in the list. If the list is empty, have the function return False.
+
+**solution:
+def Minimum(arr):
+    min=arr[0]
+    if len(arr) > 0:
+        for i in range(0, len(arr), 1):
+            if arr[i] < min:
+                min = arr[i]
+        return min        
+    elif len(arr) == 0 : #empty
+        return False   
+arr=[3, -2, 5, 8, 0, 9, 1]
+y=Minimum(arr)
+print(y)
+
+7. Maximum - Create a function that takes a list and returns the maximum value in the list. If the list is empty, have the function return False.
+
+**solution:
+def Maximum(arr):
+    max=arr[0]
+    if len(arr) > 0:
+        for i in range(0, len(arr), 1):
+            if arr[i] > max:
+                max = arr[i]
+        return max        
+    elif len(arr) == 0: #empty
+        return False   
+arr=[1,6,5,8]
+y=Maximum(arr)
+print(y)
+
+8. Ultimate Analysis - Create a function that takes a list and returns a dictionary that has the sumTotal, average, minimum, maximum and length of the list.
+
+**solution:
+def ultimate_analysis(arr):
+    min=arr[0]
+    max=arr[0]
+    sum=0
+    avg=0
+    dict={}
+    length=len(arr)
+
+    for i in range(0, len(arr), 1):
+        sum+=arr[i]
+        if arr[i] < min:
+            min = arr[i]
+        elif arr[i] >max:
+            max =arr[i]    
+    avg=sum/length
+    dict['sumTotal']=sum
+    dict['average']=avg
+    dict['minimum']=min
+    dict['maximum']=max
+    dict['length']=length
+
+    return dict          
+arr=[3, -2, 5, 8, 0, 9, 1]
+y=ultimate_analysis(arr)
+print(y)
+
+****or we can solve it as:
+def ultimate_analysis(arr):
+	dictionary={
+	"sumTotal":sum(arr),
+	"average":sum(arr)/len(arr),
+	"minimum":min(arr),
+	"maximum":max(arr),
+	"length":len(arr),
+	}
+	return dictionary
+arr=[3, -2, 5, 8, 0, 9, 1]
+print(ultimate_analysis(arr))
+9. Reverse List - Create a function that takes a list and return that list with values reversed. Do this without creating a second list. (This challenge is known to appear during basic technical interviews.)
+
+**solution:
+def reverseList(arr):
+    return arr[::-1]
+   
+arr=[3, -2, 5, 8, 0, 9, 1]
+y=reverseList(arr)
+print(y)
+
+**or other solution:
+def reverseList(arr):
+	for i in range(int(len(arr)/2)): #we will iterate through the array from the first element to the last element until we reach the middle of the array, that's why we put len[arr]/2 which is the middle of the array.
+		arr[i], arr[len(arr) -1 -i ] = arr[len(arr) -1 -i ], arr[i]
+	return arr
+arr=[3, -2, 5, 8, 0, 9, 1]
+print(reverseList(arr))	
