@@ -11,16 +11,16 @@ class user:
             return True
         return False    
     def display_user_balance(self):
-        print(self.name +"  "+ str(self.account_balance))
+        print("User Name: "+self.name +", User Balance: "+ str(self.account_balance))
     def transfer_money(self, other_user, amount):
         hap = self.make_withdrawal(amount)
         if hap == True:
             other_user.make_deposite(amount)
 
-sahar =user("sahar", "mmm", 1200)
+sahar =user("sahar", "murrarsahar@gmail.com", 1200)
 sahar.make_deposite(500)
 sahar.display_user_balance()
-momen = user("momen", "rrr", 2000)
+momen = user("momen", "user2@gmial.com", 2000)
 sahar.transfer_money(momen, 400)
 
 sahar.display_user_balance()
