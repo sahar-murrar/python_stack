@@ -54,11 +54,11 @@ def Greaterthansecond(arr):
         for i in range(0, len(arr), 1):
             if arr[i] > arr[1]:
                 newarray.append(arr[i])
+        print(len(newarray))
         return newarray        
        
 arr=[10,3,4,8,9]
-y=Greaterthansecond(arr)
-print(y)
+print(Greaterthansecond(arr))
 
 5.This Length, That Value - Write a function that accepts two integers as parameters: size and value. The function should create and return a list whose length is equal to the given size, and whose values are all the given value.
 
