@@ -17,7 +17,8 @@ app=Flask(__name__)
      
 @app.route('/repeat/<times>/<name>')
 def repeat(times,name):
-    return render_template('index.html', num_times=int(times), user_name=name)
+    #return f"{(name*int(times))}" #if we want to print without using redner and html file.
+     return render_template('index.html', num_times=int(times), user_name=name)
 
 @app.errorhandler(404)
 def errorMessage(e):
