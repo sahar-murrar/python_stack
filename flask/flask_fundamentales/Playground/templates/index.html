@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground Assignment</title>
+    <style>
+        main{
+            text-align: center;
+            margin: 0 auto;
+        }
+        .block{
+            height: 100px;
+            width: 100px;
+            background-color: rgb(124, 211, 211);
+            border: 3px solid black;
+            margin-right: 10px;
+            margin-top: 10px;
+            display: inline-block;
+            float: left;
+            
+        }
+        #wholecontainer{
+            text-align: center;
+           width: 500px;
+           margin: 0 auto;
+           justify-content: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <main>
+        <div id="wholecontainer"> 
+                <div>
+                    <h2>Welcome!</h2>
+                </div>
+                {%if(num_times == None): %}
+                    {%for i in range(3): %}
+
+                        <div class="block" style="background-color: rgb(124, 211, 211);"></div>
+
+                    {%endfor%}
+
+                {%endif%}
+                {%if not num_times==None%}
+                    {%for i in range(num_times): %}
+
+                        <div class="block" style="background-color: {{given_color}};"></div>
+
+                    {%endfor%}
+                {%endif%}    
+        </div>
+        
+    </main>
+    
+    
+</body>
+</html>
