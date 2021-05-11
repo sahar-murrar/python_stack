@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="{{ url_for('static', filename='JS/functions.js') }}"></script>
+
+    <style>
+        
+    .box{
+        width: 50px;
+        height: 50px;
+        background:red;
+        /* margin: -2px;       */
+        display: inline-block;
+    }
+    main{
+        font-size: 0; /*to remove the spaces between the inline divs*/
+  
+    }
+
+    </style>
+
+</head>
+<body>
+    <main>
+        {%for i in range(x):%}
+            {%for j in range(y):%}
+                {%if (i+j)%2 !=0%}
+                    {% set color="black"%}
+                {%endif%}
+                <div class="box" style="background: {{color}};"></div>
+            {%endfor%}
+            <br>
+        {%endfor%}
+    </main>
+    
+</body>
+</html>
