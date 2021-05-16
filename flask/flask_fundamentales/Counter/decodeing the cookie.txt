@@ -1,0 +1,14 @@
+to decode the cookie information:
+1. inspect
+2.Aplication
+3. cookies and then choose the session and copy the value if it.
+for me the value was: "eyJhY3R1YWxfdGltZXMiOjQsImNvdW50X3RpbWVzIjo2LCJmbGFnIjowLCJpbmNyZWFtZW50QnkiOjR9"
+4. go to the terminal and activate py3Env
+5. type python and then import base64
+6. type  base64.urlsafe_b64decode('value_of_the_session ===') and hit enter
+you shoud see your stores values indide the cookie so in my case:
+ base64.urlsafe_b64decode('eyJhY3R1YWxfdGltZXMiOjQsImNvdW50X3RpbWVzIjo2LCJmbGFnIjowLCJpbmNyZWFtZW50QnkiOjR9===')
+b'{"actual_times":4,"count_times":6,"flag":0,"increamentBy":4}'
+
+**to delete a cookie we just select it and press on the cross sign it will be deleted and when we refresh the page all the values will be set to its inital values e.g: count=1.
+

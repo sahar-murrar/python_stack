@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Counter</title>
+
+    <style>
+       
+        main{
+            margin: 0px auto;
+            width: 350px;
+            justify-content: center;
+        }
+        div{
+            margin-top: 250px;
+        }
+
+        button{
+            border-radius: 5px;
+        }
+        .pinkbutton{
+            background-color: rgb(199, 86, 105);
+            color: white;
+            border: 2px solid black;
+        }
+        .greenbutton{
+            background-color: rgb(30, 97, 30);
+            color: white;
+            border: 2px solid black;
+        }
+        input{
+            margin: 2px;
+        }
+        p{
+            font-weight: bold;
+        }
+        .bluebutton{
+            background-color: rgb(61, 189, 189);
+            color: black;
+            font-weight: bold;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Counter</h1>
+            <p>
+                <h2>the acualt visit times: {{session['actual_times']}} and the count is: {{session['count_times']}}</h2>
+            </p>
+            
+            <form action="/reset_addTwo" method="post">
+                <input class="pinkbutton" type="submit" name="button" value="Add two Visits!">
+                <input class="greenbutton" type="submit" name="button" value="Reset">
+                <p> Increament by:                     
+                    <input style="border: 2px solid black;" type="text" id="increamentBy" name ="increamentBy" placeholder="Enter the amount of increament...">
+                    <input class="bluebutton" type="submit" name="button" value="Increament">
+                </p>
+            </form>
+        </div>
+      
+    </main>
+
+    
+</body>
+</html>
