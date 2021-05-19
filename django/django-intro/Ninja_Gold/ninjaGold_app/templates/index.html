@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    <style>
+         #head{
+            display: flex;
+        }
+        .forms{
+            border: 2px solid black;
+            width: 190px;
+            height: 150px;
+            text-align: center;
+        }
+        nav{
+            display: flex;
+            justify-content: space-evenly;
+            padding-top: 20px;
+        }
+        textarea{
+            border: 2px solid black;
+        }
+        input{
+            border: 2px solid black;
+        }
+        .hi{
+            width: 1279px;
+            height: 175px;
+            border: 2px solid black;
+
+        }
+        #activities { 
+            height: 175px;
+            width: 1279px;
+            border: 2px solid black;
+            padding-left: 10px;
+            
+        }
+        #green{
+            color: green;
+        }
+        #red{
+            color:red
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div id="head">
+            <div>Your Gold:</div>
+            <div>
+                <input type="text" name="golevalue" value=0>
+            </div>
+
+        </div>
+        <nav>
+            <br>
+            <div class="forms">
+                <h4>Farm</h4>
+                <p>(earns 10-20 golds)</p>
+                <form action="/process_money" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="farm">
+                    <input type="submit" name="button" value="Find Gold!">
+                </form>
+            </div>
+            <br>
+            <div class="forms">
+                <h4>Cave</h4>
+                <p>(earns 5-10 golds)</p>
+                <form action="/process_money" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="cave">
+                    <input type="submit" name="button" value="Find Gold!">
+                </form>
+            </div>
+            <br>
+            <div class="forms">
+                <h4>House</h4>
+                <p>(earns 2-5 golds)</p>
+                <form action="/process_money" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="house">
+                    <input type="submit" name="button" value="Find Gold!">
+                </form>
+            </div>
+            <br>
+            <div class="forms">
+                <h4>Casino</h4>
+                <p>(earns/takes 0-50 golds)</p>
+                <form action="/process_money" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="casino">
+                    <input type="submit" name="button" value="Find Gold!">
+                </form>
+            </div>
+        </nav>
+
+
+        <div>
+            <h3>Activities:</h3>
+            <div id="activities">
+                {% for row in request.session.activities %}
+                {% if "Earned" in row %}
+                    <p id="green">{{ row }}</p>
+                {%endif%} 
+                {% if "Entered" in row %}
+                    <p id="red">{{ row }}</p>
+                {%endif%}    
+                {% endfor%}
+            </div>
+        </div>
+
+    
+
+    
+    </main>
+</body>
+</html>
