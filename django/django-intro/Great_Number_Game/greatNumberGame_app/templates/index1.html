@@ -9,7 +9,7 @@
           main{
             margin: 0px auto;
             width: 600px;
-            padding-top: 120px;
+            padding-top: 50px;
             text-align: center;
             justify-content: center;
         }
@@ -24,7 +24,7 @@
             font-weight: bold;
             justify-content: center;
             /* padding-top: 100px; */
-            margin-top: 10px;
+            /* margin-top: 10px; */
             margin-bottom: 15px;
         }
         p{
@@ -60,7 +60,15 @@
             margin-top: 10px;
             margin-bottom: 15px; 
         }
-       
+        span{
+            color: red;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #header{
+            background-color: rgb(182, 40, 182);
+            height: 100px;
+        }
 
     </style>
 </head>
@@ -70,16 +78,48 @@
         <h2>I am Thinking of a number between 1 and 100</h2>
         <h3>Take a guess!</h3>
         {%if user_num == request.session.random_num%}
-        <div id="green"><p>{{user_num}} was the number!</p>
-            <form action="/reset" method="post">
-                {% csrf_token %}
-                <input class="whitebutton" type="submit" name="button" value="Play again!"> 
-            </form>    
-        </div>
+        <nav>
+            <div id="green"><p>{{user_num}} was the number!</p>
+                <form action="/reset" method="post">
+                    {% csrf_token %}
+                            <input class="whitebutton" type="submit" name="button" value="Play again!"> 
+                </form>  
+            </div>
+          <form action="/username" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter your name...">
+            <input type="submit" name="button" value="Submit">
+          </form>   
+            <span>
+                you took {{request.session.played_times}} playing attempts
+            </span>
+            <br>
+        </nav>
+        
         {%elif user_num > request.session.random_num%}
-        <div> <p>Too High!</p></div>
+        
+            <div> <p>Too High!</p></div>
+            {% if request.session.played_times >= 5 %}
+            <div id="header">
+                <span>You Lose!</span>
+                <form action="/reset" method="post">
+                    {% csrf_token %}
+                    <input class="whitebutton" type="submit" name="button" value="Play again!"> 
+                </form>
+            </div>
+            {%endif%}
+        
         {%elif user_num > 0 and request.session.random_num > user_num  %} <!--checking if the user_num is not -1 or >0 and if the random number greater than the user_num, if we but it like this user_num < request.session.random_num it will make problems because of less than sign inside the html -->
-        <div> <p>Too Low!</p></div>
+            <div> <p>Too Low!</p></div>
+            {% if request.session.played_times >= 5 %}
+            <div id="header">
+                <span>You Lose!</span>
+                <form action="/reset" method="post">
+                    {% csrf_token %}
+                    <input class="whitebutton" type="submit" name="button" value="Play again!"> 
+                </form>
+            </div>
+            {%endif%}
         {%endif%}
         <form action="/guess" method="post">
             {% csrf_token %}
@@ -87,6 +127,7 @@
             <br><br>
             <input class="pinkbutton" type="submit" name="button" value="Submit">
         </form>
+
     </main>
    
 </body>

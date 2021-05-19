@@ -4,4 +4,5 @@ urlpatterns = [
     path('',views.guess),
     path('guess',views.guess_result),
     path('reset',views.reset),
+    path('username',views.send_name),
 ]

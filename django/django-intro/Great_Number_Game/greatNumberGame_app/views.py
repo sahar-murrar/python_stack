@@ -10,21 +10,33 @@ def guess(request):
         if request.method == "GET": #if the request is get (which means only when do refresh for the web page)
             request.session['random_num']=random.randint(1,100) #generating a random number between 1 and 100, then save it inside sessio key called random_num.
             print("the random generated number is:",request.session['random_num'])
+            request.session['played_times']=0   
     elif 'flag' not in request.session:
             request.session['flag']=0
             request.session['random_num']=random.randint(1,100) #generating a random number between 1 and 100, then save it inside sessio key called random_num.
-            print("the random generated number is:",request.session['random_num'])     
+            print("the random generated number is:",request.session['random_num'])   
+            request.session['played_times']=0    
     if 'user_num' in request.session:
         user_num=request.session['user_num'] #set user_num to request.session['user_num'] wheter it is =-1 or the user input.
+        # if 'random_num' not in request.session:
+        #     request.session['random_num']=random.randint(1,100) #generating a random number between 1 and 100, then save it inside sessio key called random_num.
+        #     print("the random generated number is:",request.session['random_num'])
         if request.session['user_num'] !=-1:
             print("user number is:",request.session['user_num']) #printing the user input
             #comparing the generated number with the user input:
             if(request.session['user_num'] == request.session['random_num']): 
                 print("sucess")
+                print(f"you took {request.session['played_times']} of attempts")
             elif(request.session['user_num'] > request.session['random_num']):
-                print("Too High!")   
+                print("Too High!")
+                if request.session['played_times'] < 6: 
+                    request.session['played_times']+=1 
+                    print("played_times: ",request.session['played_times']) 
             elif(request.session['user_num'] < request.session['random_num']):
                 print("Too Low!") 
+                if request.session['played_times'] < 6: 
+                    request.session['played_times']+=1 
+                    print("played_times: ",request.session['played_times']) 
                     
     request.session['user_num']=-1 #setting the value of request.session['user_num'] to -1 and that's why we assigned it's value to user_num variable to make it possible to change the value of the session key wihtout affecting the actual value
     #if the value remained as it, when we refresh the web page it will remain the value of the session as the old value and then it will give a result without entering an input  from the user.
@@ -50,6 +62,18 @@ def reset(request):
         del request.session['user_num']
 
     if 'random_num' in request.session:    
-        del request.session['random_num']    
+        del request.session['random_num']  
+    #or use :
+    # request.session.clear()    
+  
 
     return redirect('/') 
+
+
+def send_name(request):
+    if request.method =='POST':
+        request.session['name']=request.POST['username']
+        # request.session['name']=[]
+        # request.session['name'].append(request.POST['username'])
+        # request.session.save()
+        return render(request, 'userInfo.html')
