@@ -1,0 +1,34 @@
+
+1)Creating 3 users:
+User.objects.create(first_name="Yasar", last_name="Naser", email_address="yasar_98@outlook.sa",age="23")
+User.objects.create(first_name="Sahar", last_name="Murrar", email_address="Murrar_98@outlook.sa",age="23")
+User.objects.create(first_name="Hadeel", last_name="sss", email_address="hadeel8@outlook.sa",age="27")
+
+2) retriving all the users afteroverriding the __str__ function inside the class User
+##
+in models.py inside class User:
+    def __str__(self):
+        return f"<User object: {self.first_name} ({self.last_name}) {self.email_address} {self.age} {self.created_at} {self.updated_at} > "
+## 
+User.objects.all()
+
+3)Retrieve the last user
+User.objects.last()
+
+4)Retrieve the first user
+User.objects.first()
+
+5) Change the user with id=3 so their last name is Pancakes.
+   u=User.objects.get(id=3)
+   u.last_name="Panckcakes"
+   u.save()
+
+6)Delete the user with id=2 from the database
+  c=User.objects.get(id=2)
+  c.delete()
+
+7) Get all the users, sorted by their first name
+User.obejcts.all().order_by("first_name)
+
+8)Get all the users, sorted by their first name in descending order
+User.obejcts.all().order_by("-first_name)
