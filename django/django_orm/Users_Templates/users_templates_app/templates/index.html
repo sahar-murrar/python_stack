@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Users Template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        *{
+         margin: 0px auto; 
+        }
+        head{
+            width: 700px;;
+            justify-content: center;
+            
+        }
+        hr{
+            border: 1px solid black;
+            width: 900px;
+        }
+        h1{
+            text-align: center;
+        }
+        table{
+            width: 700px;
+        }
+        .inputflex{
+            display: flex;
+        }
+        .wholeflex{
+            display: flex;
+        }
+        .addbutton{
+            margin-left: 310px;
+            border: 2px solid black;
+            width: 100px;
+            font-weight: bold;
+        }
+    
+        input{
+            margin-left: 10px;
+        }
+        div{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <head>
+        <h1>All the Users</h1>
+        <table style="width: 700px;" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for user in all_user %}
+                    <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{user.email_address}}</td>  
+                            <td>{{user.age}}</td>  
+                    </tr>
+                
+                {% endfor %}
+            </tbody>
+                
+        </table>
+    </head>
+    <hr>
+   
+    <h1>Add a User</h1>
+    <form style="width: 700px;" action="/process_data" method="post">
+        {% csrf_token %}
+        <div class="wholeflex"> 
+            <div class="inputflex">
+                <div>
+                  First Name: 
+                </div>
+                <div>
+                    <input type="text" name="firstname">
+                </div>
+            </div>
+            <div class="inputflex">
+                <div>
+                    Last Name: 
+                </div>
+                <div>
+                    <input type="text" name="lastname">
+                </div>
+                
+            </div>
+        </div>
+        <br>
+
+        <div class="wholeflex"> 
+            <div class="inputflex">
+                <div>
+                  Email: 
+                </div>
+                <div>
+                    <input type="text" name="email">
+                </div>
+            </div>
+            <div class="inputflex">
+                <div>
+                    Age: 
+                </div>
+                <div>
+                    <input type="text" name="age">
+                </div>
+                
+            </div>
+        </div>
+        <br>
+            <input class= "addbutton" type="submit" name="button" value="Add">
+    </form>
+</body>
+</html>
