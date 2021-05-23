@@ -53,7 +53,11 @@ Second Ninja
 Third Ninja
 
 8. Retrieve all the ninjas from the last dojo:
+>>> ninja=Ninjas.objects.filter(dojo=Dojos.objects.last())
+>>> for i in ninja.all():
+...     print(i.first_name +" "+ i.last_name)
+9. Retrieve the last ninja's dojo:
 >>> Ninjas.objects.last().dojo.name
 
-9. Create a new dojo:
+10. Create a new dojo:
 >>> Dojos.objects.create(name="Huda shobaki", city="Hebron", state="Palestine", desc="new dojo")
