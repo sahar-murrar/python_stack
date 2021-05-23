@@ -1,0 +1,59 @@
+1. Create 3 new dojos:
+>>> Dojos.objects.create(name="Sahar Murrar", city="Ramallah", state="Palestine")
+>>> Dojos.objects.create(name="Sireen Murrar", city="Hebron", state="Palestine")
+>>> Dojos.objects.create(name="Diana Murrar", city="Paris", state="France")
+2. Delete the 3 dojos you just created:
+#deleteing the first dojo:
+>>> d1=Dojos.objects.get(id=1)
+>>> d1.delete()
+
+#deleting the second dojo:
+>>> d1=Dojos.objects.get(id=2)
+>>> d1.delete()
+
+#deleting the third dojo:
+>>> d1=Dojos.objects.get(id=3)
+>>> d1.delete()
+3. Create 3 more dojos
+>>> Dojos.objects.create(name="Sahar Murrar", city="Ramallah", state="Palestine")
+>>> Dojos.objects.create(name="Nadia Murrar", city="Nablus", state="Palestine")
+>>> Dojos.objects.create(name="Ahmad Murrar", city="seol", state="South Korea")
+
+4. Create 3 ninjas that belong to the first dojo:
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=4), first_name="First", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=4), first_name="Second", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=4), first_name="Third", last_name="Ninja")
+
+5. Create 3 ninjas that belong to the second dojo:
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=5), first_name="second dojo first", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=5), first_name="second dojo second", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=5), first_name="second dojo third", last_name="Ninja")
+
+6. Create 3 ninjas that belong to the third dojo:
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=6), first_name="third dojo first", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=6), first_name="third dojo second", last_name="Ninja")
+>>> Ninjas.objects.create(dojo=Dojos.objects.get(id=6), first_name="third dojo third", last_name="Ninja")
+
+7. Retrieve all the ninjas from the first dojo:
+>>> ninja=Ninjas.objects.filter(dojo=Dojos.objects.get(id=4))
+>>> for i in ninja.all():
+...     print(i.first_name +" "+ i.last_name)
+...
+First Ninja
+Second Ninja
+Third Ninja
+
+###or using first():
+>>> ninja=Ninjas.objects.filter(dojo=Dojos.objects.first())
+>>> for i in ninja.all():
+...     print(i.first_name +" "+ i.last_name)
+...
+First Ninja
+Second Ninja
+Third Ninja
+
+8. Retrieve all the ninjas from the last dojo:
+>>> Ninjas.objects.last().dojo.name
+
+9. Create a new dojo:
+>>> Dojos.objects.create(name="Huda shobaki", city="Hebron", state="Palestine", desc="new dojo")
