@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        input, select{
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+        #container{
+            margin: 0px auto;
+            width: 700px;
+            display: flex;
+            justify-content: space-between;
+        }
+        hr{
+            border: 1px solid black;
+            width: 1020px;
+        }
+        nav{
+            margin: 0px auto;
+            width: 200px;
+            justify-content: center;
+        }
+        #dojoname{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <form action="/create_dojo" method="post">
+            {% csrf_token %}
+            <div>
+                <h1>Add a Dojo</h1>
+                <div class="flex">
+                    <div>Name:</div>
+                    <input type="text" name="name">
+                </div>
+                <div class="flex">
+                    <div>City:</div>
+                    <input type="text" name="city">
+                </div>
+                <div class="flex">
+                    <div>State:</div>
+                    <input type="text" name="state">
+                </div>
+                <input type="submit" name="button" value="Add">
+        
+            </div>
+        </form>
+
+        <form action="/create_ninja" method="post">
+            {% csrf_token %}
+            <div>
+                <h1>Add a Ninja</h1>
+                <div class="flex">
+                    <div> First Name:</div>
+                    <input type="text" name="fname">
+                </div>
+                <div class="flex">
+                    <div>Last Name:</div>
+                    <input type="text" name="lname">
+                </div>
+                <div class="flex">
+                    <div>Dojo:</div>
+                    <select name="dojo" value="-select a dojo-">
+                        {% for dojo in all_dojos %}
+                        <option value="{{dojo.name}}">{{dojo.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="submit" name="button1" value="Add">
+        
+            </div>
+        </form>
+    </div>
+    <hr>
+    <nav>
+        <h2>All the Dojos</h2>
+        {% for dojo in all_dojos %}
+        <p id="dojoname">{{dojo.name}}</p>
+        <ul>
+            {% for ninjas in dojo.ninjas.all %}
+            <li> {{ninjas.first_name}} {{ninjas.last_name}}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </nav>
+    
+</body>
+</html>
