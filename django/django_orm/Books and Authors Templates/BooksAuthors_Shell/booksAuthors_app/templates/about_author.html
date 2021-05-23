@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Author</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        .bold{
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{author_fname}} {{author_lname}}</h1>
+    <p> ID: {{author_id}}</p>
+    <div class="flex">
+        <p>Notes: </p>
+        <p class="bold">{{author_notes}}</p>
+    </div>
+    <p>Books:</p>
+    <ul>
+        {% for b in books %}
+        <li>{{b.title}}</li>
+        {% endfor %}
+    </ul>
+    <div class="flex">
+        <form action="/addBook_toAuthor" method="post">
+            {% csrf_token%}
+            <select name="book" value="-select book-">
+                {% for book in all_books %}
+                <option>{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" name="button" value="Add">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Book</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        .bold{
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{book_title}}</h1>
+    <p> ID: {{book_id}}</p>
+    <div class="flex">
+        <p>Description: </p>
+        <p class="bold">{{book_desc}}</p>
+    </div>
+    <p>Authors:</p>
+    <ul>
+        {% for auth in authors %}
+        <li>{{auth.first_name}} {{auth.last_name}}</li>
+        {% endfor %}
+    </ul>
+    <div class="flex">
+        <form action="/addAuthor_toBook" method="post">
+            {% csrf_token%}
+            <select name="author" value="-select author-">
+                {% for author in all_authors %}
+                <option>{{author.first_name}} {{author.last_name}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" name="button" value="Add">
+        </form>
+    </div>
+
+</body>
+</html>
