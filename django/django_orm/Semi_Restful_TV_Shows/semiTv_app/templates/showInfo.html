@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read(One)</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        .margin{
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <h2>TV Show {{id}}</h2>
+        <h2 class="margin"><a href="/shows">Go Back</a></h2>
+    </div>
+    <p>Title: {{title}}</p>
+    <p>Network: {{network}}</p>
+    <p>Release Date: {{releaseDate}}</p>
+    <p>Description: {{desc}}</p>
+    <p>Last Updated: {{lastupdated}}</p>
+    <p><a href="/shows/{{id}}/edit">Edit</a> | <a href="/shows/{{id}}/destroy">Delete</a></p>
+</body>
+</html>
