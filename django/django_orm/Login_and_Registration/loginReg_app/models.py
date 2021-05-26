@@ -32,7 +32,7 @@ class UserManager(models.Manager):
                             errors["email"] = "this email is already used by another account !!"
                             print("this email is already used by another account !!")    
         if str(postData['Bday']) > str(CurrentDate) :
-            errors['Bday'] = "Birthday must be a past date!!"   
+            errors['Bday'] = "Birthday date must be a past date!!"   
         if len(postData["password"]) <8:
             errors["password"] = "Your Password should be at least 8 characters!"
         elif postData["password"] !=postData["confirmpassword"]:

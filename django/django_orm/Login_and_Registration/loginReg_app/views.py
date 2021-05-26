@@ -5,8 +5,8 @@ from django.contrib import messages
 import bcrypt
 # Create your views here.
 def index(request):
-    if 'Userid' in request.session:
-        return render(request, 'welcome.html')
+    # if 'Userid' in request.session:
+    #     return render(request, 'welcome.html')
     return render(request, 'index.html')
 
 def register(request):
@@ -60,6 +60,5 @@ def login(request):
                 request.session['Userid']= user.id
                 request.session['fname']= user.first_name
                 request.session['lname']= user.last_name
-                request.session['Bday']=user.Bdate
                 return redirect('/welcome') 
     return redirect('/')         
