@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    <style>
+        span{
+            color: red;
+        }
+        .flex{
+            display: flex;
+        }
+        .margin{
+            margin-top: 100px;
+            margin-left: 40px;
+        }
+        .Pink{
+            border-bottom: 2px solid black ;
+            color: rgb(233, 64, 93);
+            font-size: large;
+            font-style:oblique;
+            font-weight: bold;
+            width: 120px;
+        }
+        .yellow{
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <form  style="width: 1070px;" action="/process_messages" method="post">
+            {% csrf_token %}
+            <p class="Pink">Post a message</p>
+            <textarea name="message"  cols="150" rows="7"></textarea>
+            <br>
+            <br>
+            <input class ="yellow" style="float: right;" type="submit" name="postmessage" value="Post a message">
+        </form>
+        <h3 class="margin">
+            <a href="/welcome"> Go Back</a>
+        </h3>
+    </div>
+    
+    {% for message in messages reversed %}
+        <div class="flex">
+            <h4>{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at}}</h4>
+            <form action="/delete_message" method="post">
+                {% csrf_token %}
+                <input style="margin-left: 20px; margin-top: 22px; background-color: rgb(109, 47, 109); color: white; font-weight: bold; height: 20px;" type="submit" name="deleteButton" value="Delete Message">
+                <input type="hidden" name="messageIdDelete" value='{{message.id}}'>
+                <input type="hidden" name="userIdDelete" value='{{message.user.id}}'>
+                <input type="hidden" name="created_at_date" value='{{message.created_at}}'>
+            </form>
+        </div>
+        
+        <p style="padding-left:20px ;">{{message.messageText}}</p>       
+        <form  style="width: 720px; padding-left: 20px;" action="/process_comments" method="post">
+            {% csrf_token %}
+            {% for comment in comments %}
+                    {% if comment.message.id == message.id %}
+                        <h4>{{comment.user.first_name}} {{comment.user.last_name}} - {{comment.created_at}} <span>(Comment)</span></h4>
+                        <p style="padding-left:20px ;">{{comment.commentText}}</p>
+                    {% endif %}
+            {% endfor %} 
+            <p class="Pink">Post a comment</p>
+            <textarea name="comment"  cols="100" rows="3"></textarea>
+            <input type="hidden" name="messageId" value="{{message.id}}">
+            <br>
+            <br>
+            <input class ="yellow" style="float: right;" type="submit" name="postmessage" value="Post a comment">
+        </form>
+    {% endfor %}
+</body>
+</html>
