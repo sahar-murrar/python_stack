@@ -7,8 +7,8 @@ import dateutil.parser as parser
 import datetime
 # Create your views here.
 def index(request):
-    # if 'Userid' in request.session:
-    #     return render(request, 'welcome.html')
+    if 'Userid' in request.session:#if the user logged in already rediret him/her to the welcome page without the need to re-access the website
+        return redirect('/welcome')
     return render(request, 'index.html')
 
 def register(request):
@@ -28,10 +28,6 @@ def register(request):
             Bday=request.POST['Bday']
             request.session['user']=email
             if(password == confirmpassword): #even if we didn't enter a password and hit register it will render the welcome page because both password and it's confirmation are the same (they are empty)!!
-                # for user in all_users:
-                #     if user.email == email:
-                #         print("this email is already used by another account !!")
-                #         return redirect('/')
                 hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
                 new_user=models.create_user(fname, lname, email,Bday, hashed_password)
                 request.session['Userid']= new_user.id
@@ -43,9 +39,6 @@ def register(request):
 
 def welcome(request):
     if 'Userid' in request.session: #to make sure that if we tried to access the /welcome routes from the url to see the welcome page to not open it if we are not logged in/saved to the session
-        # context={
-        #     'cars': models.get_user_cars(request.session['Userid'])
-        # }
         return render(request, 'welcome.html') 
     return redirect('/')    
 
@@ -68,9 +61,6 @@ def login(request):
     return redirect('/')         
 
 def wall(request):
-    # if 'msgid' in request.session:
-    #     print(models.get_all_comments_for_Post(request.session['msgid']))
-    #     comments=models.get_all_comments_for_Post(request.session['msgid'])
     context={
        'messages':models.get_all_messages(),
        'comments':models.get_all_comments(),
