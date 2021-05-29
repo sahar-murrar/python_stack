@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    <style>
+         .flex{
+            display: flex;
+        }
+        #margin{
+            margin-top: 28px;
+            margin-left: 850px;
+        }
+        span{
+            color: red;
+            font-weight: bold;
+        }
+        h2{
+            border-bottom: 2px solid black;
+            width: 270px;
+        }
+    </style>
+</head>
+<body>
+    <div class ="flex">
+        <div>
+            <h1>Welcome, {{user.first_name}}!</h1>
+        </div>
+        <h3 id="margin">
+            <a href="/logout">Logout</a>
+        </h3>
+    </div>
+    <hr>
+    <h2>
+        Your Favorite Books List:
+    </h2>
+    <ul>
+        {% for book in list_of_FavoriteBooks %}
+            <li> 
+                <p>
+                 <span>Book Title:</span> {{book.title}}, <span>Added By:</span> {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}
+                </p> 
+
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book Info</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        .link{
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        #margin{
+            margin-top: 28px;
+            margin-left: 850px;
+        }
+        #container{
+            margin: 0px auto;
+            width: 700px;
+            display: flex;
+            justify-content: space-between;
+        }
+        input, textarea{
+            margin-left: 5px;
+            margin-bottom: 8px;
+        }
+        .border{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class ="flex">
+        <div>
+            <h1>Welcome, {{logged_user.first_name}}!</h1>
+        </div>
+        <h3 id="margin">
+            <a href="/logout">Logout</a>
+        </h3>
+    </div>
+    <hr>
+    <div id="container">
+        <div>
+            {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="/edit_book_info/{{book.id}}" method="post">
+                {% csrf_token %}
+                <div class="flex">
+                    Title:
+                    <textarea class="border" name="title"  cols="15" rows="3">{{book.title}}</textarea>
+                </div>
+                <p>Added By: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} </p>
+                <p>Added on: {{book.created_at}}</p>
+                <p>Last updated at: {{book.updated_at}}</p>
+                <div class="flex">
+                    Description:
+                    <textarea class="border" name="desc" cols="30" rows="5">{{book.desc}}</textarea>
+                </div>
+                <div class="flex">
+                    <input type="submit" name="button" value="Update">
+                    <input type="submit" name="button" value="Delete">
+                </div>
+            </form>
+        </div>
+        <div>
+            <h1>Users who Like This Book:</h1>
+            <ul>
+                {% for user in users %}
+                    {% if user.id == logged_user.id %}
+                        <div class="flex">
+                            <li> {{user.first_name}} {{user.last_name}}</li>
+                            {% if book in liked_books %}
+                                <a class="link" href="/unfavorite_book/{{book.id}}">(Un-Favorite)</a>
+                            {% endif%}
+                        </div>
+                    {% endif %} 
+                    {% if user.id != logged_user.id %}   
+                        <li> {{user.first_name}} {{user.last_name}}</li>
+                        {% if book not in liked_books %}
+                            <br>
+                            <a class="link" href="/favorite_book/{{book.id}}">(Add to Favorites)</a>
+                        {% endif%}
+                    {% endif %}
+                {% endfor %}
+               
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

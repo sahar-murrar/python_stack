@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        .flex{
+            display: flex;
+        }
+        .link{
+            color: red;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        .link1{
+            margin: 0px;
+            color: red;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        .allBooks{
+            margin-left: 20px;
+            width: 1000px;
+        }
+        #margin{
+            margin-top: 28px;
+            margin-left: 850px;
+        }
+        #container{
+            margin: 0px auto;
+            width: 700px;
+            display: flex;
+            justify-content: space-between;
+        }
+        input, textarea{
+            margin-left: 5px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class ="flex">
+        <div>
+            <h1>Welcome, {{request.session.fname}}!</h1>
+        </div>
+        <h3 id="margin">
+            <a href="/logout">Logout</a>
+        </h3>
+    </div>
+    <hr>
+    <div id="container">
+        <div>
+            <h1>Add a Favorite Book</h1>
+            {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="/process_fav_book" method="post">
+                {% csrf_token %}
+                <div class="flex">
+                    <div> Title</div>
+                    <input type="text" name="title" placeholder="Book Title" required>
+                </div>
+                <div class="flex">
+                    <div> Description</div>
+                    <textarea name="desc" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                </div>
+                <input type="submit" name="button" value="Add">
+            </form>
+            <a href="/view_all_Favorites/{{loggedUser_id}}">View my Favorite Books List</a>
+        </div>
+
+        <div class="allBooks">
+            <h1>All Books</h1>
+            {% for book in books %}
+              {% if book in liked_books%}
+                <div class="flex">
+                    <a href="/book_info/{{book.id}}"> {{book.title}} </a> 
+                    <p class="link1"> Added to your Favourites already!</p>
+                </div>
+                <p>(added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}) </p>
+                <p style="font-style: italic;"> {{book.desc}} </p>
+              {% endif %}
+              {% if book not in liked_books%}
+                <div class="flex">
+                    <a href="/book_info/{{book.id}}"> {{book.title}} </a> 
+                    <a class="link" href="/favorite_book/{{book.id}}">(Add to Favorites)</a>
+                </div>
+                <p>(added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}) </p>
+                <p style="font-style: italic;"> {{book.desc}} </p>
+              {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+    
+    
+</body>
+</html>
